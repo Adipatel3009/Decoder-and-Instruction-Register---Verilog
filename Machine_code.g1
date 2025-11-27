@@ -1,0 +1,68 @@
+
+//ADD
+0000
+D205 // MOVI 5 into R2
+D307 // MOVI 7 into R3
+0253 // ADD: R5(2) + R7(3) -> Rdest
+0000
+
+// ADDI
+D10A    // MOVE 10 INTO R1
+5105    // ADD 10 + 5 = 15
+0000    // NOOP
+
+// SUBTRACT
+D305    // MOVI R3, 5      (R3 ← 5)
+D407    // MOVI R4, 7      (R4 ← 7)
+0493    // SUB R4, R3      (R4 ← R3 - R4 = 5 - 7 = -2)
+0000    // NOP
+
+// SUBTRACTI
+D505    // MOVI 5 INTO R5
+9503    // SUBTRACT IMMEDIATE 3 FROM R5 = 5 = 2
+0000    //NOP
+
+//CMP -- SHOULD BE EQUAL
+D205      // MOVI 5 INTO R2
+D305      // MOVI 5 INTO R3
+02B3    // COMPARE REG2 AND REG3
+0000    // NOOP
+
+// CMP -- SHOULD NOT BE EQUAL
+D207      // MOVI 7 INTO R2
+D305      // MOVI 5 INTO R3
+02B3    // COMPARE REG2 AND REG3
+0000    // NOOP
+
+//CMPI -- SHOULD BE EQUAL
+D101      // MOVI 1 INTO R1
+B101       // COMPARE R1 TO IMMEDIATE = 1
+0000
+
+//CMPI -- SHOULD NOT BE EQUAL
+D101      // MOVI 1 INTO R1
+B105       // COMPARE R1 TO IMMEDIATE = 5
+0000
+
+// AND      -- SHOULD BE 0111 AND 0101 = 0101
+D207      // MOVI 7 INTO R2
+D305      // MOVI 5 INTO R3
+0213      // AND 7 AND 5
+0000      // NOOP
+
+// AND      -- SHOULD BE 1111 AND 1111 = 1111
+D20F      // MOVI 16 INTO R2
+D30F      // MOVI 16 INTO R3
+0213      // AND F AND F = F
+
+// AND      -- SHOULD BE 0000 AND 0000 = 0000
+D200      // MOVI 0 INTO R2
+D300      // MOVI 0 INTO R3
+0213      // AND 0 AND 0 = 0
+
+// SIMPLE LOAD
+D205    // MOVI R2, 5          (R2 ← 5, memory address)
+4302    // LOAD R3, [R2]       (R3 ← Memory[R2] = Memory[5])
+        // 4=LOAD/STOR opcode, 3=Rdest(R3), 0=LOAD extension, 2=Rsrc(R2)
+0000    // NOP
+
